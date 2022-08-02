@@ -1,3 +1,4 @@
+from tabnanny import verbose
 import tensorflow as tf
 from tensorflow import keras
 
@@ -26,18 +27,12 @@ def train(args):
     if not args.generator:
         train_loader = load_data(data_path = args.train_path)
         valid_loader = load_data(data_path = args.valid_path)
-
-        history = model.fit(train_loader,
-                            epochs = args.total_epochs,
-                            verbose = 2,
-                            callbacks = [model_checkpoint_callback],
-                            validation_data = valid_loader)
     
     else:
         train_loader = load_ImageGen(data_path = args.train_path, test = False)
         valid_loader = load_ImageGen(data_path = args.valid_path, test = True)
 
-    history = model.fit(x = train_loader, epochs = args.total_epochs,
+    history = model.fit(train_loader, epochs = args.total_epochs, verbose = 2,
                         callbacks = [model_checkpoint_callback], validation_data = valid_loader
                         )
     return history 
