@@ -23,14 +23,8 @@ def train(args):
                                                         monitor = 'val_accuracy',
                                                         mode = 'max',
                                                         save_best_only = True)
-
-    if not args.generator:
-        train_loader = load_data(data_path = args.train_path)
-        valid_loader = load_data(data_path = args.valid_path)
-    
-    else:
-        train_loader = load_ImageGen(data_path = args.train_path, test = False)
-        valid_loader = load_ImageGen(data_path = args.valid_path, test = True)
+    train_loader = load_data(data_path = args.train_path)
+    valid_loader = load_data(data_path = args.valid_path)
 
     history = model.fit(train_loader, epochs = args.total_epochs, verbose = 2,
                         callbacks = [model_checkpoint_callback], validation_data = valid_loader
@@ -47,7 +41,6 @@ def parse_args(parser):
     parser.add_argument('--img_W', type=int, default=28)
     parser.add_argument('--total_epochs', type=int, default=30)
     parser.add_argument('--save_path',type=str, default='./save')
-    parser.add_argument('--generator', type=bool, default=False) 
     args = parser.parse_args()
     return args 
 
