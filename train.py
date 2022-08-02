@@ -13,7 +13,7 @@ def train(args):
 
     base_model = BaseModel(args.num_channels, args.img_W, args.img_H, args.num_classes)
  
-    loss_func = [keras.losses.CategoricalCrossentropy(from_logits = True),]
+    loss_func = [keras.losses.SparseCategoricalCrossentropy(from_logits = True),]
     metrics = ['accuracy']
     model = base_model(loss_func, metrics)
 
