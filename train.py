@@ -37,9 +37,9 @@ def train(args):
         train_loader = load_ImageGen(data_path = args.train_path, test = False)
         valid_loader = load_ImageGen(data_path = args.valid_path, test = True)
 
-        history = model.fit(x = train_loader, epochs = args.total_epochs,
-                            callbacks = [model_checkpoint_callback], validation_data = valid_loader
-                            )
+    history = model.fit(x = train_loader, epochs = args.total_epochs,
+                        callbacks = [model_checkpoint_callback], validation_data = valid_loader
+                        )
     return history 
 
 def parse_args(parser):
